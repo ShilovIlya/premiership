@@ -1,4 +1,16 @@
 <h1>Premiership season 20162017</h1>
+Select round:
 <select [(ngModel)]="selectedRound">
-  <option *ngFor="let round of rounds" [value]="round">{{round.roundNumber}}</option>
+  <option *ngFor="let round of rounds" [ngValue]="round">{{round.roundNumber}}</option>
 </select>
+
+<table class="round-results">
+  <tr *ngFor="let match of selectedRound.matches"
+       class="round-result">
+    <td class="first-team"> {{match.firstTeam}} </td>
+    <td class="first-team-goals"> {{match.firstTeamGoals}} </td>
+    <td class="second-team-goals">{{match.secondTeamGoals}}</td>
+    <td class="second-team">{{match.secondTeam}}</td>
+  </tr>
+</table>
+<button (click)="onClickLog()">log</button>
