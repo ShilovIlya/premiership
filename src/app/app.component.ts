@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Round } from './model/round';
 import { Match } from './model/match';
+import { Team } from './model/team';
 
 @Component({
   selector: 'app-root',
@@ -12,18 +13,55 @@ export class AppComponent implements OnInit {
   rounds: Round[];
   selectedRound: Round;
   title = 'premiership';
+  teams: Team[] = [];
 
   ngOnInit() {
     this.getRounds();
     this.selectedRound = this.rounds[0];
+    this.setTeams();
   }
 
-  onClickLog(): void {
-    console.log(this.selectedRound);
-    for (let key in this.selectedRound) {
-      console.log(key);
-      console.log(this.selectedRound[key]);
+  setTeams(): void {
+    let teamsDict = {};
+    for (let round of this.rounds) {
+      for (let match of round.matches) {
+        if (teamsDict.hasOwnProperty(match.firstTeam)) {
+          teamsDict[match.firstTeam].push(match);
+        } else {
+          teamsDict[match.firstTeam] = [match];
+        }
+        if (teamsDict.hasOwnProperty(match.secondTeam)) {
+          teamsDict[match.secondTeam].push(match);
+        } else {
+          teamsDict[match.secondTeam] = [match];
+        }
+      }
     }
+    for (let teamName in teamsDict) {
+      this.teams.push(new Team(teamName, teamsDict[teamName]));
+    }
+    this.setTeamsPosition();
+  }
+
+  compareTeam = (team1: Team, team2: Team) => {
+    let result: boolean;
+    if (team1.getPoints() === team2.getPoints()) {
+      if (team1.getGoalsDifference() === team2.getGoalsDifference()) {
+        result = team1.getGoalsFor() > team2.getGoalsFor();
+      } else {
+        result = team1.getGoalsDifference() > team2.getGoalsDifference();
+      }
+    } else {
+      result = team1.getPoints() > team2.getPoints();
+    }
+    return result ? -1 : 1;
+  }
+
+  setTeamsPosition(): void {
+    this.teams = this.teams.sort(this.compareTeam);
+    this.teams.forEach((team, index) => {
+      team.setPosition(index + 1);
+    });
   }
 
   getRounds(): void {

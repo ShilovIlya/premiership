@@ -6,24 +6,21 @@
 }
 .round-results td {
   padding: 10px;
+  border: 1px solid grey;
 }
 
 .first-team {
   width: 40%;
-  border: 1px solid grey;
 }
 
 .first-team-goals {
   width: 10%;
-  border: 1px solid grey;
 }
 
 .second-team {
   width: 40%;
-  border: 1px solid grey;
 }
 
 .second-team-goals {
   width: 10%;
-  border: 1px solid grey;
 }

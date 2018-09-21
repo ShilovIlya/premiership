@@ -1,0 +1,10 @@
+.leaderboard {
+  width: 100%;
+  text-align: center;
+  border: 1px solid grey;
+  border-collapse: collapse;
+}
+.leaderboard td,th {
+  padding: 5px;
+  border: 1px solid grey;
+}

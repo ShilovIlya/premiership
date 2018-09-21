@@ -1,0 +1,29 @@
+<h2>Leaderboard:</h2>
+<table class="leaderboard">
+  <thead>
+  <th>Position</th>
+  <th>Team</th>
+  <th>Played</th>
+  <th>Win</th>
+  <th>Drawn</th>
+  <th>Lost</th>
+  <th>Goals for</th>
+  <th>Goals against</th>
+  <th>Goals difference</th>
+  <th>Points</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let team of teams">
+      <td>{{team.getPosition()}}</td>
+      <td>{{team.getName()}}</td>
+      <td>{{team.getMatchesCount()}}</td>
+      <td>{{team.getWin()}}</td>
+      <td>{{team.getDrawn()}}</td>
+      <td>{{team.getLost()}}</td>
+      <td>{{team.getGoalsFor()}}</td>
+      <td>{{team.getGoalsAgainst()}}</td>
+      <td>{{team.getGoalsDifference()}}</td>
+      <td>{{team.getPoints()}}</td>
+    </tr>
+  </tbody>
+</table>
