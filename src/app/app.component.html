@@ -1,16 +1,20 @@
-<h1>Premiership season 20162017</h1>
-Select round:
-<select [(ngModel)]="selectedRound">
-  <option *ngFor="let round of rounds" [ngValue]="round">{{round.roundNumber}}</option>
-</select>
+<h1>Premiership season 2016/2017</h1>
+<div *ngIf="roundsAreLoaded">
+  <div class="round-select-wrapper">
+    Select round:
+    <select [(ngModel)]="selectedRound" class="round-select">
+      <option *ngFor="let round of rounds" [ngValue]="round">{{round.roundNumber}}</option>
+    </select>
+  </div>
 
-<table class="round-results">
-  <tr *ngFor="let match of selectedRound.matches"
-       class="round-result">
-    <td class="first-team"> {{match.firstTeam}} </td>
-    <td class="first-team-goals"> {{match.firstTeamGoals}} </td>
-    <td class="second-team-goals">{{match.secondTeamGoals}}</td>
-    <td class="second-team">{{match.secondTeam}}</td>
-  </tr>
-</table>
-<leaderboard [teams]="teams"></leaderboard>
+  <table class="round-results">
+    <tr *ngFor="let match of selectedRound.matches"
+        class="round-result">
+      <td class="first-team"> {{match.firstTeam}}</td>
+      <td class="first-team-goals"> {{match.firstTeamGoals}}</td>
+      <td class="second-team-goals">{{match.secondTeamGoals}}</td>
+      <td class="second-team">{{match.secondTeam}}</td>
+    </tr>
+  </table>
+  <leaderboard [teams]="teams"></leaderboard>
+</div>

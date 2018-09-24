@@ -1,3 +1,11 @@
+.round-select-wrapper {
+  margin-bottom: 10px;
+}
+
+.round-select {
+  width: 100px;
+}
+
 .round-results {
   width: 50%;
   text-align: center;
