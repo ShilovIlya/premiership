@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/index';
 import { HttpClient } from '@angular/common/http';
+import { environment } from "../environments/environment";
 
 @Injectable()
 export class PremiershipDataService {
-  private premiershipUrl = 'https://s3.eu-central-1.amazonaws.com/js-assignment/data.json';
+  private premiershipUrl = `${environment.apiUrl}/api/proxy/rounds`;
 
   constructor(private http: HttpClient) {
   }

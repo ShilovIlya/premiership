@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Round } from './model/round';
 import { Team } from './model/team';
 import { PremiershipDataService } from './premiership-data.service';
+import { Match } from "./model/match";
 
 @Component({
   selector: 'app-root',
@@ -26,7 +27,15 @@ export class AppComponent implements OnInit {
   getRounds(): void {
     this.premiershipDataService.getPremiershipRounds()
       .subscribe(rounds => {
-          this.rounds = rounds;
+          this.rounds = [];
+          rounds.forEach(round => {
+            const matches = [];
+            round.matches.forEach(match => {
+              const keys = Object.keys(match);
+              matches.push(new Match(keys[0], match[keys[0]], keys[1], match[keys[1]]));
+            });
+            this.rounds.push(new Round(round.round, matches))
+          });
           this.selectedRound = this.rounds[0];
           this.setTeams();
           this.roundsAreLoaded = true;
